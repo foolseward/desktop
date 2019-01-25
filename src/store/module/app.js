@@ -1,15 +1,21 @@
-import routers from '@/router/routers'
 export default {
   state: {
+    //屏幕尺寸
     height: null,
     width: null,
+    //监视屏幕尺寸变化
     resize: false,
+    //全局alert框
     alertStatus: {
       type:null, 
       msg:null
     },
+    //全局loading
     interceptorStatus: false,
+    //滚动轴方法数组
     scrollCbArr: [],
+    //侧边栏样式
+    leftSliderStatus: true,
   },
   getters: {
     //menuList: (state, getters, rootState) => console.log(1)
@@ -31,6 +37,9 @@ export default {
     scrollCbArr: (state) => {
       return state.scrollCbArr;
     },
+    leftSliderStatus: (state) => {
+      return state.leftSliderStatus;
+    }
   },
   mutations: {
     /**
@@ -43,9 +52,7 @@ export default {
      * [用innerHeight初始化页面]
      */
     setSize (state, {height, width}) {
-      if(Math.abs(state.height- height)> 200 || state.width!== width){
-        state.resize= !state.resize;
-      }
+      state.resize= !state.resize;
       state.height = height;
       state.width= width;
     },
@@ -61,5 +68,11 @@ export default {
     setAlertStatus (state, {type, msg}) {
       state.alertStatus = {type: type, msg: msg};
     },
+    /**
+     * [控制侧边栏类型]
+     */
+    setLeftSliderStatus(state, status){
+      state.leftSliderStatus = status;
+    }
   }
 }

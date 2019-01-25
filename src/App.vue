@@ -1,8 +1,12 @@
 <template>
-  <div>
-    <keep-alive>
-      <router-view/>
-    </keep-alive>
+  <div style="width:100%;">
+    <div style="display:flex; background-color:#f5f5f5;">
+      <left-slider></left-slider>
+      <mainer></mainer>
+    </div>
+    <div v-if="loginStatus" class="interceptor login-page">
+      <login-page @login-func="loginStatus=!loginStatus"></login-page>
+    </div>
 <!-- loading层 -->
     <div v-if="interceptorStatus" class="interceptor delay-show">
       <!-- <div class="interceptor-loading interceptor-roller">  -->
@@ -11,7 +15,7 @@
             <!-- <circle loading grey stroke="#fff" fill="transparent"></circle> -->
             <circle class="circle" loading blue stroke="#21A8B6" fill="transparent"></circle>
         </svg>
-        <div style="text-align:center;">loading...</div>
+        <div class="loading-text" style="text-align:center;">loading</div>
         <!-- <div class="loading-icon" :style="{'background-image': 'url('+ logo+')'}"></div> -->
       </div>
     </div>
@@ -28,7 +32,7 @@
           </div>
         </div>
         <div class="alert-close">
-          / close
+          CLOSE.
         </div>
       </div>
     </div>
@@ -37,13 +41,20 @@
 
 <script>
 import logo from '@/assets/logo.png'
-import { alertMixin } from '@/mixin'
+import { alertMixin, sizeMixin } from '@/mixin'
+import loginPage from '@/view/login-page/login-page.vue'
+import leftSlider from '@/view/left-slider/left-slider.vue'
+import mainer from '@/view/mainer/mainer.vue'
 export default {
-  mixins:[alertMixin],
+  components: {
+    loginPage, leftSlider, mainer
+  },
+  mixins: [alertMixin, sizeMixin],
   name: 'App',
   data () {
     return {
       logo: logo,
+      loginStatus: true,
     }
   },
   computed:{
@@ -96,10 +107,10 @@ export default {
   transform: translateY(-50%);
 }
 .alert-outer-right{
-  border-left: 15px solid #848484;
+  border-left: 6px solid #848484;
 }
 .alert-outer-wrong{
-  border-left: 15px solid #848484;
+  border-left: 6px solid #848484;
 }
 .alert-type-icon{
   position: absolute;
@@ -110,11 +121,12 @@ export default {
   height: 64px;
   line-height: 64px;
   border-radius: 32px;*/
-  transform: translateX(-52px) translateY(30%);
+  transform: translateX(-46px) translateY(30%);
 }
 .alert-type-icon img{
   width: 74px;
   height: 74px;
+  border-radius: 37px;
 }
 .alert-outer-right .alert-type-icon{
   background-color: #848484;
@@ -136,7 +148,7 @@ export default {
   line-height: 1.5;
 }
 .alert-close{
-  color:#848484;position:absolute;right:10px;bottom:0;height:60px;line-height: 60px;
+  color:#848484;position:absolute;right:10px;bottom:-10px;height:60px;line-height: 60px;font-size: 18px;cursor: pointer;
 }
 .svg{
   width:120px;
@@ -173,54 +185,5 @@ export default {
   }
 }
 
-@media screen and (min-width: 600px) {
-/*ignore*/
-  .alert-outer{
-    color:#fff;
-    background-color: rgba(51, 59, 70, 0.85);
-    min-height: 100px;
-    width: 420px;
-    transform: translateY(-50%);
-  }
-  .alert-outer-right{
-    border-left: 8px solid #848484;
-  }
-  .alert-outer-wrong{
-    border-left: 8px solid #848484;
-  }
-  .alert-type-icon{
-    position: absolute;
-    padding: 6px;
-    line-height: 0;
-    border-radius: 50%;
-    transform: translateX(-47px) translateY(30%);
-  }
-  .alert-type-icon img{
-    width: 74px;
-    height: 74px;
-  }
-  .alert-outer-right .alert-type-icon{
-    background-color: #848484;
-  }
-  .alert-outer-wrong .alert-type-icon{
-    background-color: #848484;
-  }
-  .alert-msg-outer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding:12px 48px 60px 36px;
-    min-height: 180px;
-    width: 100%;
-  }
-  .alert-msg{
-    text-align: justify;
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  .alert-close{
-    font-size: 16px;
-    color:#848484;position:absolute;right:10px;bottom:0;height:48px;line-height: 48px;
-  }
-}
+
 </style>

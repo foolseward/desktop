@@ -13,28 +13,32 @@
 const root= '';
 export default [
   {
-    path: root,
-    name: 'star',
-    component: () => import('@/view/wps-resume/wps-resume.vue')
+    path: '/',
+    component: () => import('@/view/mainer/mainer.vue'),
+    meta:{
+      title: '',
+      show: false,
+    },
+    children: [
+      { 
+        path: '/',
+        name: 'manager', 
+        component: () => import('@/view/project-manager/project-manager.vue'),
+        meta: {
+          title: '项目管理',
+          show: true,
+          path: '/'
+        }
+      },
+      { 
+        path: '/edit/:prefix',
+        name: 'editor', 
+        component: () => import('@/view/lucky-editor/lucky-editor.vue'),
+        meta: {
+          title: '项目管理',
+          show: false,
+        }
+      },
+    ]
   },
-  {
-    path: '/recume',
-    name: 'recume',
-    component: () => import('@/view/recume/recume.vue')
-  },
-  {
-    path: '/getapp',
-    name: 'getapp',
-    component: () => import('@/view/getapp/getapp.vue')
-  },
-  {
-    path: '/countdown',
-    name: 'tb-countdown',
-    component: () => import('@/view/show/tb-countdown/tb-countdown.vue')
-  },
-  {
-    path: '*',
-    name: 'error_404',
-    component: () => import('@/view/404/404.vue')
-  }
 ]

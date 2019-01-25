@@ -2,6 +2,7 @@ import { login, logout, getUserInfo } from '@/api/user'
 import { setToken, getToken } from '@/libs/util'
 import axios from 'axios'
 import { rootPath, apiPath } from '@/config'
+import qs from 'qs'
 
 export default {
   state: {

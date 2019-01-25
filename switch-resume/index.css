@@ -1,5 +1,6 @@
+﻿/*ignore*/
+
 html {
-    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
     font-size: 16px;
     color: #333b46;
 }
@@ -8,7 +9,7 @@ div{
     box-sizing: border-box;
 }
 
-input[type="button"], input[type="submit"], input[type="reset"], input[type="file"],
+input[type="button"], input[type="submit"], input[type="reset"] ,
 button{
     outline: none;
     -webkit-appearance:none;
@@ -67,15 +68,20 @@ input, textarea {
     color:#737373;
 }
 
+/*html{
+   -moz-user-select: none; 
+    -webkit-user-select: none;
+    -ms-user-select: none;   
+    -khtml-user-select: none; 
+    user-select: none; 
+}*/
+
 .base{
-	background-color: #21A8B6;
+
 }
 
 .base-flex{
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-.icon-duihao1:before { content: "\e633"; }
-
-.icon-point:before { content: "\e60f"; }
