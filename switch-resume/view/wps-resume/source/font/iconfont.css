@@ -1,0 +1,45 @@
+
+@font-face {font-family: "iconfont";
+  src:url('iconfont.svg?t=1542350096146#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-html5:before { content: "\e600"; }
+
+.icon-menu:before { content: "\e605"; }
+
+.icon-css3:before { content: "\e6b7"; }
+
+.icon-home:before { content: "\e626"; }
+
+.icon-canvas:before { content: "\e6aa"; }
+
+.icon-pingjia:before { content: "\e621"; }
+
+.icon-camera:before { content: "\e61a"; }
+
+.icon-icon--:before { content: "\e768"; }
+
+.icon-wxmini:before { content: "\e619"; }
+
+.icon-git:before { content: "\e61b"; }
+
+.icon-javascript:before { content: "\e636"; }
+
+.icon-linux:before { content: "\e63a"; }
+
+.icon-webpack:before { content: "\e65b"; }
+
+.icon-youxiang:before { content: "\e774"; }
+
+.icon-node:before { content: "\f1fd"; }
+
+.icon-vue:before { content: "\f25f"; }
+

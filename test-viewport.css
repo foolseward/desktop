@@ -1,0 +1,54 @@
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
+.header {
+  height: 104vw;
+  background-size: 100% 100%;
+  background-image: url(./source/head.png)
+}
+
+.container {
+  padding:0 6.26667vw;
+}
+.title{
+  padding: 3.2vw 0;
+  font-weight: bold;
+  color: #6799DA;
+  text-align: center;
+  font-size: 5.6vw;
+  border-bottom: 0.53333vw solid #6799DA;
+}
+.text{
+  color: #767576;
+  font-size: 3.73333vw;
+  line-height: 6.4vw;
+  text-align: justify;
+  margin-top: 4.26667vw;
+}
+.container-pic{
+  margin-top: 4.26667vw;
+  height: 53.33333vw;
+  background-size: 100% 100%;
+  background-image: url(./source/pic.png)
+}
+.bottom{
+  color:#fff;
+  margin-top: 4.26667vw;
+  height: 46.66667vw;
+  background-size: 100% 100%;
+  background-image: url(./source/bottom.png);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bottom .icon{
+  margin-top: 8vw;
+  width: 11.73333vw;
+  height: 11.73333vw;
+  background-size: 100% 100%;
+  background-image: url(./source/phone_icon.png);
+}

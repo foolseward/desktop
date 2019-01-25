@@ -1,0 +1,81 @@
+html {
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    font-size: 16px;
+    color: #333b46;
+}
+
+div{
+    box-sizing: border-box;
+}
+
+input[type="button"], input[type="submit"], input[type="reset"], input[type="file"],
+button{
+    outline: none;
+    -webkit-appearance:none;
+}
+
+@media screen and (min-width: 375px) {
+    html {
+        /* iPhone6的375px尺寸作为16px基准，414px正好18px大小, 600 20px */
+        font-size: calc(100% + 2 * (100vw - 375px) / 39) !important; 
+        font-size: calc(16px + 2 * (100vw - 375px) / 39) !important;
+    }
+}
+@media screen and (min-width: 414px) {
+    html {
+        /* 414px-1000px每100像素宽字体增加1px(18px-22px) */
+        font-size: calc(112.5% + 4 * (100vw - 414px) / 586) !important;
+        font-size: calc(18px + 4 * (100vw - 414px) / 586) !important;
+    }
+}
+@media screen and (min-width: 600px) {
+    html {
+        /* 600px-1000px每100像素宽字体增加1px(20px-24px) */
+        font-size: calc(125% + 4 * (100vw - 600px) / 400) !important;
+        font-size: calc(20px + 4 * (100vw - 600px) / 400) !important;
+    }
+}
+@media screen and (min-width: 1000px) {
+    html {
+        /* 1000px往后是每100像素0.5px增加 */
+        font-size: calc(137.5% + 6 * (100vw - 1000px) / 1000) !important;
+        font-size: calc(22px + 6 * (100vw - 1000px) / 1000) !important;
+    }
+}
+
+input, textarea {
+	color: #515a6e;
+	width: 100%;
+	border: none;
+	outline: none;
+    appearance: none; 
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:#737373;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:#737373;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:#737373;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:#737373;
+}
+
+.base{
+	background-color: #21A8B6;
+}
+
+.base-flex{
+	display: flex;
+	justify-content: center;
+}
+
+.icon-duihao1:before { content: "\e633"; }
+
+.icon-point:before { content: "\e60f"; }
