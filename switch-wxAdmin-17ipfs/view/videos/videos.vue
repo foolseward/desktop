@@ -92,8 +92,8 @@ export default {
       //分类显示
       splitShow: {
         pointer: 0,
-        arr: [null, 'company', 'activity', 'bases'],
-        textArr: ['', '公司视频', '活动视频', '基地视频'],
+        arr: [null, 'company', 'activity', 'ipfs'],
+        textArr: ['', '公司视频', '活动视频', 'ipfs视频'],
       }
     }
   },

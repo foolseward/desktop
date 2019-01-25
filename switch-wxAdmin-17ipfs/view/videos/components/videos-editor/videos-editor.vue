@@ -24,8 +24,8 @@
           <Option :value="'activity'">
             活动视频
           </Option>
-          <Option :value="'bases'">
-            基地视频
+          <Option :value="'ipfs'">
+            ipfs视频
           </Option>
         </Select>
       </div>

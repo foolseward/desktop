@@ -52,7 +52,7 @@ export default {
     belongText: function(){
       if(this.belong==='company') return '公司视频';
       if(this.belong==='activity') return '活动视频';
-      if(this.belong==='bases') return '基地视频';
+      if(this.belong==='ipfs') return 'ipfs视频';
     }
   },
   methods: {

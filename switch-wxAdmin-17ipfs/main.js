@@ -74,7 +74,7 @@ axios.get({
         //初始化页面最小高度
         this.$store.commit('setMinHeight', window.innerHeight);
         this.$store.commit('init', res.data);
-        alert('当期使用的是17旅居后台')
+        alert('当前使用的是17ipfs后台')
       }
     })
   }
