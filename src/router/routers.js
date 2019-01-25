@@ -28,5 +28,9 @@ export default [
       url: 'http://hcysun.me/vue-design/more/vue-hoc.html'
     },
     component: () => import('@/view/hop/hop.vue')
+  },
+  {
+    path:'/star',
+    component: () => import('@/view/star-perspective/star-perspective.vue')
   }
 ]
