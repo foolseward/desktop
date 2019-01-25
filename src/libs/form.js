@@ -37,6 +37,8 @@ class Form {
       return data
     }, (error) => {
       store.commit('setInterceptorStatus', false);
+      Message.error('服务内部错误')
+      // 对响应错误做点什么
       return Promise.reject(error)
     })
   }
@@ -46,42 +48,16 @@ class Form {
       method: 'post',
       baseURL: apiPath,
       headers: {
-        'Content-Type': 'multipart/form-data',
-        'ws-key': store.getters.wsKey,
+        'Content-Type': 'multipart/form-data'
       },
       transformRequest: [function (data, headers) {
         let fd = new FormData();
         for(let i in data){
           console.log(i, data);
-          if(data[i] instanceof FormData){
-            fd= data[i];
-            break;
-          }
           fd.append(i, data[i]);
         }
         return fd;
       }],
-    }
-    return Axios.create(conf)
-  }
-
-  createGet () {
-    let conf = {
-      method: 'get',
-      baseURL: apiPath,
-      timeout: 10000,
-    }
-    return Axios.create(conf)
-  }
-
-  createPost () {
-    let conf = {
-      method: 'post',
-      baseURL: apiPath,
-      timeout: 10000,
-      headers: {
-        'ws-key': store.getters.wsKey,
-      },
     }
     return Axios.create(conf)
   }
@@ -92,20 +68,6 @@ class Form {
   // 请求实例url, data
   form (options) {
     var instance = this.create()
-    this.interceptors(instance, options.url)
-    options = Object.assign({}, options)
-    return instance(options)
-  }
-
-  get (options) {
-    var instance = this.createGet()
-    this.interceptors(instance, options.url)
-    options = Object.assign({}, options)
-    return instance(options)
-  }
-
-  post (options) {
-    var instance = this.createPost()
     this.interceptors(instance, options.url)
     options = Object.assign({}, options)
     return instance(options)

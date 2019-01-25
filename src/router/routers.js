@@ -14,32 +14,27 @@ const root= '';
 export default [
   {
     path: root,
-    name: 'main',
-    component: () => import('@/view/main/main.vue'),
-    meta:{
-      title: '活动&基地页',
-      path: '/',
-      show: true,
-    },
+    name: 'star',
+    component: () => import('@/view/wps-resume/wps-resume.vue')
   },
   {
-    path: '/videos',
-    name: 'videos',
-    component: () => import('@/view/videos/videos.vue'),
-    meta:{
-      title: '视频页',
-      path: '/videos',
-      show: true,
-    },
+    path: '/recume',
+    name: 'recume',
+    component: () => import('@/view/recume/recume.vue')
   },
   {
-    path: root+ '/edit',
-    name: 'edit',
-    component: () => import('@/view/edit/edit.vue'),
+    path: '/getapp',
+    name: 'getapp',
+    component: () => import('@/view/getapp/getapp.vue')
   },
   {
-    path: root+ '/videosedit',
-    name: 'videosedit',
-    component: () => import('@/view/videosedit/edit.vue'),
+    path: '/countdown',
+    name: 'tb-countdown',
+    component: () => import('@/view/show/tb-countdown/tb-countdown.vue')
   },
+  {
+    path: '*',
+    name: 'error_404',
+    component: () => import('@/view/404/404.vue')
+  }
 ]

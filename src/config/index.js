@@ -6,7 +6,6 @@ export const ASYNC_PIC_NUM= 6
 //用于路由的根路径
 export const rootPath= ''
 //用于请求的根路径
-export const apiPath= 
-	process.env.NODE_ENV=== 'production'? 'http://118.25.222.233:4422': 'http://127.0.0.1:4422';
-
-export const staticPath= 'http://qiniu.17lvju.com/'
+//export const apiPath= 'http://votexyapi.17lvju.com'
+export const apiPath= 'http://voteapi.17lvju.com'
+//export const apiPath= 'http://127.0.0.1:2234'

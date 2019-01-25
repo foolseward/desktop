@@ -1,4 +1,5 @@
 import HttpRequest from '@/libs/axios'
-
-const axios = new HttpRequest();
-export default axios;
+import Form from '@/libs/form'
+//const axiosed = new HttpRequest()
+const axiosForm = new Form()
+export default axiosForm
