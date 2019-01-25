@@ -14,27 +14,15 @@ const root= '';
 export default [
   {
     path: root,
-    name: 'star',
-    component: () => import('@/view/wps-resume/wps-resume.vue')
+    name: 'lucky',
+    component: () => import('@/view/lucky/test.vue')
   },
+  
+  //高阶组件
+  //http://hcysun.me/vue-design/more/vue-hoc.html
   {
-    path: '/recume',
-    name: 'recume',
-    component: () => import('@/view/recume/recume.vue')
-  },
-  {
-    path: '/getapp',
-    name: 'getapp',
-    component: () => import('@/view/getapp/getapp.vue')
-  },
-  {
-    path: '/countdown',
-    name: 'tb-countdown',
-    component: () => import('@/view/show/tb-countdown/tb-countdown.vue')
-  },
-  {
-    path: '*',
-    name: 'error_404',
-    component: () => import('@/view/404/404.vue')
+    path:'/hop',
+    name: 'hop',
+    component: () => import('@/view/hop/hop.vue')
   }
 ]

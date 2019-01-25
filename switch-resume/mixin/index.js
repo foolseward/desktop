@@ -1,21 +1,29 @@
-import { isNull, resExtraction, getElementTop, getCountdown, throttle } from '@/libs/tools'
+import { isNull, resExtraction, getElementTop, getCountdown } from '@/libs/tools'
 import { setMessageCodeLimit, getMessageCodeLimit, setCacheMessage } from '@/libs/util'
 import axios from 'axios'
 import { SUCCESS, apiPath } from '@/config'
 /**
  * [为元素赋初始高度]
  */
-export const heightMixin= {
-  mounted: function () {
-    this.$el.style.minHeight= this.$store.getters.minHeight+ 'px';
+export const sizeMixin= {
+  computed: {
+    HEIGHT: function(){
+      return this.$store.getters.height();
+    },
+    WIDTH: function(){
+      return this.$store.getters.width();
+    },
   },
 }
 
+/**
+ * [警告框]
+ */
 export const alertMixin= {
   computed: {
     alertStatus: function(){
       return this.$store.getters.alertStatus;
-    }
+    },
   },
   methods: {
     /**
@@ -197,21 +205,39 @@ export const countDownMixin= {
       future.sec?(this.COUNT_DOWN_SECOND= future.sec):(this.COUNT_DOWN_SECOND= 0);
       //this.COUNT_DOWN_INTERVAL_INIT();
     },
+    //废弃方法
+    // COUNT_DOWN_INTERVAL_INIT(){
+    //   if(this._COUNT_DOWN_INTERVAL) return;
+    //   this._COUNT_DOWN_INTERVAL= setInterval(() => {
+    //     this.COUNT_DOWN_SECOND--;
+    //     if(this.COUNT_DOWN_SECOND<= 0){
+    //       this.COUNT_DOWN_SECOND= 59
+    //       this.COUNT_DOWN_MINUTE--;
+    //     }
+    //     if(this.COUNT_DOWN_MINUTE<= 0){
+    //       this.COUNT_DOWN_MINUTE= 59
+    //       this.COUNT_DOWN_HOUR--;
+    //     }
+    //     if(this.COUNT_DOWN_HOUR<= 0){
+    //       this.COUNT_DOWN_HOUR= 23;
+    //       this.COUNT_DOWN_DAY--;
+    //     }
+    //   }, 1000);
+    // },
     //秒重置为59的时候触发
     COUNT_DOWN_BY_SEC(){
       this.COUNT_DOWN_MINUTE--;
-      if(this.COUNT_DOWN_MINUTE< 0){
+      if(this.COUNT_DOWN_MINUTE<= 0){
         this.COUNT_DOWN_MINUTE= 59
         this.COUNT_DOWN_HOUR--;
       }
-      if(this.COUNT_DOWN_HOUR< 0){
+      if(this.COUNT_DOWN_HOUR<= 0){
         this.COUNT_DOWN_HOUR= 23;
         this.COUNT_DOWN_DAY--;
       }
     },
   }
 }
-
 
 /**
  * [验证码功能模块]
