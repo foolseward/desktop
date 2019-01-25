@@ -23,6 +23,10 @@ export default [
   {
     path:'/hop',
     name: 'hop',
+    meta: {
+      description: '高阶组件',
+      url: 'http://hcysun.me/vue-design/more/vue-hoc.html'
+    },
     component: () => import('@/view/hop/hop.vue')
   }
 ]

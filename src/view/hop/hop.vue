@@ -38,8 +38,9 @@ export default {
   mixins: [],
 
 /*生命周期*/
-  mounted(){
-    console.log(baseComp);
+  beforeRouteEnter(to, from, next){
+    console.warn(`主题：${to.meta.description}`);
+    next();
   },
 /*传参*/
   props: [],
