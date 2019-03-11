@@ -17,6 +17,11 @@ var commonParent= {
 const root= '';
 export default [
   {
+    path: '/walle',
+    name: 'walle',
+    component: () => import('@/view/walle/walle.vue')
+  },
+  {
     path: root,
     name: 'lucky',
     component: () => import('@/view/lucky/test.vue')
