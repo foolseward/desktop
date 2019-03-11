@@ -1,6 +1,10 @@
 //import Main from '@/view/main'
 //import parentView from '@/components/parent-view'
 
+var commonParent= {
+  template: '<div><router-view></router-view></div>'
+}
+
 /**
  * iview-admin中meta除了原生参数外可配置的参数:
  * meta: {
@@ -18,8 +22,6 @@ export default [
     component: () => import('@/view/lucky/test.vue')
   },
   
-  //高阶组件
-  //http://hcysun.me/vue-design/more/vue-hoc.html
   {
     path:'/hop',
     name: 'hop',
@@ -29,6 +31,44 @@ export default [
     },
     component: () => import('@/view/hop/hop.vue')
   },
+
+  {
+    path: '/slot',
+    name: 'slot',
+    component: commonParent,
+    children: [
+      {
+        path: 'scope',
+        name: 'scopeScope',
+        meta: {
+          description: 'slot-scope',
+          url: 'https://juejin.im/post/5c64e11151882562e4726d98'
+        },
+        component: () => import('@/view/slot/slot-parent.vue')
+      },
+    ]
+  },
+
+  {
+    path:'/directive',
+    name: 'directive',
+    meta: {
+      description: 'vue自定义指令',
+    },
+    component: commonParent,
+    children: [
+      {
+        path: 'slot-directive',
+        name: 'slotDirective',
+        meta: {
+          description: 'slot-directive',
+          url: 'https://juejin.im/post/5c64e11151882562e4726d98'
+        },
+        component: () => import('@/view/directive/slot-directive.vue')
+      },
+    ]
+  },
+
   {
     path:'/star',
     component: () => import('@/view/star-perspective/star-perspective.vue')
