@@ -17,6 +17,8 @@
         <clipPath id="clip-path-5" transform="translate(-81.8 -924.4)">
           <path d="M150.6,1000s1.4.3,1.3,1.5a1.5,1.5,0,0,1-1.1,1.5c-.3.2-5.3.5-5.3.5l-24.6,2.3v-7.3Z" fill="none"/>
         </clipPath>
+
+        
       </defs>
       <title>
         wall-e
@@ -252,7 +254,9 @@ export default {
       y: 0,
       flip: false, //控制头部转向
       audioPlay: false,
-      startArms: 0
+      startArms: 0,
+      
+
     }
   },
 
@@ -306,7 +310,6 @@ export default {
       //防止
       e.preventDefault();
       e= e.changedTouches[0];
-      console.log(e.clientX)
       let walleBox = document.getElementById('walle').getBoundingClientRect();
       //瓦力左距
       let walleCoords = walleBox.width / 2 + walleBox.left;
@@ -315,13 +318,14 @@ export default {
         this.startArms = this.armsTL();
       }
 
-      this.y = e.clientY / 80 - 2;
+      this.y = e.clientY / 40 - 2;
       if (e.clientX > walleCoords) {
         this.x = -(e.clientX / 200);
         this.flip = true;
       } else {
         this.x = e.clientX / 200 - 5;
         this.flip = false;
+      }
 
         TweenMax.set("#righteyeb2", {
           scaleX: 1 + (1 - e.clientX / walleCoords) / 5
@@ -330,8 +334,7 @@ export default {
           scaleX: 1 + (1 - e.clientX / walleCoords) / 5
         });
 
-        let walle_x= ((e.clientX / walleCoords) * 50) - 40;
-        //if(walle_x< -120) walle_x= 0;
+        let walle_x= ((e.clientX / walleCoords) * 50) - 60;
         TweenMax.set("#walle", {
           x: walle_x
         });
@@ -339,8 +342,8 @@ export default {
         //手指滑动结束，则收回瓦力手臂
         let armAnimationRate= touchend? 1: (e.clientX / walleCoords);
         //这个语句开启了一个可控制的过程，会根据触点位置及瓦力位置的比值来调节伸缩臂的伸缩距离
-        this.startArms.progress(1 - armAnimationRate).pause();
-      }
+        this.startArms.progress(Math.abs(1 - armAnimationRate)).pause();
+      
     },
   },
 } 
@@ -363,12 +366,7 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-svg {
-  width: 100vw;
-  height: 100vh;
-  max-height: 400px;
-  margin-left: 20vw;
-}
+
 
 p {
   font-size: 16px;
