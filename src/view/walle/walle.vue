@@ -17,8 +17,6 @@
         <clipPath id="clip-path-5" transform="translate(-81.8 -924.4)">
           <path d="M150.6,1000s1.4.3,1.3,1.5a1.5,1.5,0,0,1-1.1,1.5c-.3.2-5.3.5-5.3.5l-24.6,2.3v-7.3Z" fill="none"/>
         </clipPath>
-
-        
       </defs>
       <title>
         wall-e
@@ -170,6 +168,15 @@
         </g>
       </g>
     </svg>
+    
+    <img :class="['love-pic', img_state?'':'love-pic-hidden']" :src="img_url" 
+    :style="{
+      transform: `translate3d(${love_x}px, ${love_y}px, 0)`,
+      width: `${image_size}px`,
+      height: `${image_size}px`,
+      borderRadius: `${image_size/2}px`,
+    }">
+    
     </div>
 </template>
 
@@ -177,6 +184,10 @@
 /*<======|环境配置|======>*/
 
 /*<======|静态资源|======>*/
+import love00 from './resource/love00.jpg'
+import love01 from './resource/love01.jpg'
+import love02 from './resource/love02.jpg'
+import bg from './resource/bg.jpg'
 
 /*<======|引用插件|======>*/
 
@@ -256,7 +267,18 @@ export default {
       audioPlay: false,
       startArms: 0,
       
-
+      //记录是否进入过滑动状态
+      move_state: false,
+      //是否处于show状态
+      show_state: false,
+      //是否显示图片
+      img_state: false,
+      pointer: 0,
+      url_arr: [love00, love01, love02],
+      img_url: null,
+      image_size: 80,
+      love_x: 0,
+      love_y: 0,
     }
   },
 
@@ -310,6 +332,9 @@ export default {
       //防止
       e.preventDefault();
       e= e.changedTouches[0];
+
+      if(this.show_state) return;
+
       let walleBox = document.getElementById('walle').getBoundingClientRect();
       //瓦力左距
       let walleCoords = walleBox.width / 2 + walleBox.left;
@@ -343,7 +368,40 @@ export default {
         let armAnimationRate= touchend? 1: (e.clientX / walleCoords);
         //这个语句开启了一个可控制的过程，会根据触点位置及瓦力位置的比值来调节伸缩臂的伸缩距离
         this.startArms.progress(Math.abs(1 - armAnimationRate)).pause();
-      
+
+        //给照片位置
+        this.love_x= e.clientX- 80;
+        this.love_y= e.clientY- 80>= 150? 150: e.clientY- 80; 
+
+        //如果是单次触摸
+        if(touchend && !this.move_state){
+          this.move_state= false;
+          //开启秀模式
+          this.show_state= true;
+          this.img_state= true;
+          this.img_url= this.url_arr[this.pointer % this.url_arr.length];
+          this.pointer++;
+          setTimeout(() => {
+            this.show_state= false;
+            this.img_state= false;
+          }, 2000)
+          return;
+        }
+
+        //如果是移动，且不存在照片，则赋初值
+        if(!touchend && !this.img_state){
+          //记录移动状态
+          this.move_state= true;
+          this.img_state= true;
+          this.img_url= this.url_arr[this.pointer % this.url_arr.length];
+          this.pointer++;
+          return;
+        }
+
+        if(touchend){
+          this.img_state= false;
+          this.move_state= false;
+        }   
     },
   },
 } 
@@ -364,6 +422,9 @@ body {
   line-height: 0;
   overflow: hidden;
   -webkit-tap-highlight-color: transparent;
+  background-color: #ddd;
+  background-image: url(./resource/bg.jpg);
+  background-size: 100%;
 }
 
 
@@ -388,5 +449,17 @@ p {
     max-height: 300px !important;
     margin-left: 0 !important;
   }
+}
+
+.love-pic{
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 1;
+  transition: opacity 0.2s ease-out;
+}
+
+.love-pic-hidden{
+  opacity: 0
 }
 </style> 
