@@ -1,5 +1,5 @@
 <template>
-    <div id="appp" @mousemove="coordinates">
+    <div id="appp" @touchmove="coordinates($event)" @touchend="coordinates($event, true)">
       <svg id="walle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 139.4 129.4">
       <defs>
         <clipPath id="clip-path" transform="translate(-81.8 -924.4)">
@@ -71,7 +71,7 @@
         </g>
         </g>
         </g>
-        <g class="body">
+        <g class="body" v-bind:class="{isFlipped: flip}">
         <g id="backwheel">
           <path d="M149.9,1007.2l-4.8-.2s-.6-.2-2,1.2l-12.5,12.7s-1.4,2.3.3,3.5a3.9,3.9,0,0,0,3.1.8h7.1Z" transform="translate(-81.8 -924.4)" fill="#394848"/>
           <path d="M152.4,1009.2s-2-4.6-6.5-.1l-11,11.2s-3.8,4.1,1.4,4.8h16.2s7.8.2,5.5-7.4Z" transform="translate(-81.8 -924.4)" fill="#636767"/>
@@ -179,7 +179,7 @@
 /*<======|引用插件|======>*/
 
 /*<======|工具方法|======>*/
-import {TweenMax, TimelineMax} from "gsap/TweenMax";
+import { TweenMax, TimelineMax } from "gsap/TweenMax";
 /*<======|  混入  |======>*/
 
 /*<======| 子组件 |======>*/
@@ -200,7 +200,6 @@ export default {
       repeat: -1,
       repeatDelay: 2
     });
-
     tl.add('redo')
     tl.to('#lefteye', 0.5, {
       rotation: 5,
@@ -251,7 +250,7 @@ export default {
       startX: 0,
       x: 0,
       y: 0,
-      flip: false,
+      flip: false, //控制头部转向
       audioPlay: false,
       startArms: 0
     }
@@ -270,10 +269,12 @@ export default {
         rotation: 150,
         transformOrigin: '50% 50%'
       }, 'startarms');
+
       tl.to('#rightarm', 2, {
         rotation: 30,
         transformOrigin: '100% 0'
       }, 'startarms');
+
       tl.to('#newrightarm', 2, {
         x: -94,
         y: -918,
@@ -287,10 +288,12 @@ export default {
         rotation: 90,
         transformOrigin: '50% 50%'
       }, 'startarms');
+
       tl.to('#leftarm', 2, {
         rotation: 20,
         transformOrigin: '100% 0'
       }, 'startarms');
+
       tl.to('#newleftarm', 2, {
         x: -100,
         y: -924,
@@ -299,10 +302,14 @@ export default {
 
       return tl;
     },
-    coordinates(e) {
-      const audio = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/Whoa.mp3'),
-        walleBox = document.getElementById('walle').getBoundingClientRect(),
-        walleCoords = walleBox.width / 2 + walleBox.left;
+    coordinates(e, touchend) {
+      //防止
+      e.preventDefault();
+      e= e.changedTouches[0];
+      console.log(e.clientX)
+      let walleBox = document.getElementById('walle').getBoundingClientRect();
+      //瓦力左距
+      let walleCoords = walleBox.width / 2 + walleBox.left;
 
       if (this.startArms == 0) {
         this.startArms = this.armsTL();
@@ -312,12 +319,7 @@ export default {
       if (e.clientX > walleCoords) {
         this.x = -(e.clientX / 200);
         this.flip = true;
-        if (this.audioPlay === false) {
-          audio.play();
-          this.audioPlay = true;
-        }
       } else {
-        this.audioPlay = false;
         this.x = e.clientX / 200 - 5;
         this.flip = false;
 
@@ -327,12 +329,17 @@ export default {
         TweenMax.set("#lefteyeb2", {
           scaleX: 1 + (1 - e.clientX / walleCoords) / 5
         });
+
+        let walle_x= ((e.clientX / walleCoords) * 50) - 40;
+        //if(walle_x< -120) walle_x= 0;
         TweenMax.set("#walle", {
-          x: ((e.clientX / walleCoords) * 50) - 40
+          x: walle_x
         });
 
-        this.startArms.progress(1 - (e.clientX / walleCoords)).pause();
-
+        //手指滑动结束，则收回瓦力手臂
+        let armAnimationRate= touchend? 1: (e.clientX / walleCoords);
+        //这个语句开启了一个可控制的过程，会根据触点位置及瓦力位置的比值来调节伸缩臂的伸缩距离
+        this.startArms.progress(1 - armAnimationRate).pause();
       }
     },
   },
@@ -346,11 +353,13 @@ body {
   overflow: hidden;
   font-family: 'Montserrat', sans-serif;
   background: #23a9e0;
-  cursor: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/cockroach%20(2).ico'), default;
   -webkit-overflow-scrolling: touch;
+  overflow: hidden;
 }
 
 #appp {
+  line-height: 0;
+  overflow: hidden;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -378,7 +387,7 @@ p {
 
 @media screen and (max-width: 600px) {
   svg {
-    max-height: 200px !important;
+    max-height: 300px !important;
     margin-left: 0 !important;
   }
 }

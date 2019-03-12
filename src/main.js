@@ -15,9 +15,7 @@ import '@/index.css'
 
 Vue.config.productionTip = false
 document.body.innerHTML= 
-`<div id="app"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"> </script>
-`;
+`<div id="app"></div>`;
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
