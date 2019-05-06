@@ -1,5 +1,5 @@
 <template>
-    <div id="appp" @touchmove="coordinates($event)" @touchend="coordinates($event, true)">
+    <div id="appp" @touchmove="coordinates($event)" @touchend="coordinates($event, true)" :style="{'background-image': show_state?`url(${bg})`:'none'}">
       <svg id="walle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 139.4 129.4">
       <defs>
         <clipPath id="clip-path" transform="translate(-81.8 -924.4)">
@@ -25,7 +25,7 @@
         <ellipse id="shadow" cx="71.5" cy="100.4" rx="26.5" ry="3.6" fill="#394848" opacity="0.35"/>
       </g>
       <g id="Layer_2" data-name="Layer 2">
-        <g class="head" v-bind:class="{isFlipped: flip}">
+        <g class="head" v-bind:class="[flip?'isFlipped':'noFlipped']">
         <g id="neck">
           <g id="neckb">
             <path d="M157.8,995.6a2.6,2.6,0,1,1-4.1-2.2,6.1,6.1,0,0,0-1.7-.3c-1-.2-.9-1.3-.8-1.8a1.6,1.6,0,0,1-.5-1.2,1.7,1.7,0,1,1,3.4,0,1.6,1.6,0,0,1-.5,1.2,5.8,5.8,0,0,0,1.7,1.8A2.6,2.6,0,0,1,157.8,995.6Z" transform="translate(-81.8 -924.4)" fill="#a2b2b3"/>
@@ -71,7 +71,7 @@
         </g>
         </g>
         </g>
-        <g class="body" v-bind:class="{isFlipped: flip}">
+        <g class="body" v-bind:class="[flip?'isFlipped':'noFlipped']">
         <g id="backwheel">
           <path d="M149.9,1007.2l-4.8-.2s-.6-.2-2,1.2l-12.5,12.7s-1.4,2.3.3,3.5a3.9,3.9,0,0,0,3.1.8h7.1Z" transform="translate(-81.8 -924.4)" fill="#394848"/>
           <path d="M152.4,1009.2s-2-4.6-6.5-.1l-11,11.2s-3.8,4.1,1.4,4.8h16.2s7.8.2,5.5-7.4Z" transform="translate(-81.8 -924.4)" fill="#636767"/>
@@ -176,7 +176,10 @@
       height: `${image_size}px`,
       borderRadius: `${image_size/2}px`,
     }">
-    
+
+      <div class="chat-container">
+        sdf
+      </div> 
     </div>
 </template>
 
@@ -187,6 +190,7 @@
 import love00 from './resource/love00.jpg'
 import love01 from './resource/love01.jpg'
 import love02 from './resource/love02.jpg'
+import love03 from './resource/love03.jpg'
 import bg from './resource/bg.jpg'
 
 /*<======|引用插件|======>*/
@@ -274,7 +278,8 @@ export default {
       //是否显示图片
       img_state: false,
       pointer: 0,
-      url_arr: [love00, love01, love02],
+      bg: bg,
+      url_arr: [love00, love01, love02, love03],
       img_url: null,
       image_size: 80,
       love_x: 0,
@@ -342,8 +347,10 @@ export default {
       if (this.startArms == 0) {
         this.startArms = this.armsTL();
       }
-
-      this.y = e.clientY / 40 - 2;
+      
+      let eye_y;
+      eye_y= e.clientY<= 0? 0:( e.clientY>= 150? 150: e.clientY ); 
+      this.y = eye_y / 40 - 2;
       if (e.clientX > walleCoords) {
         this.x = -(e.clientX / 200);
         this.flip = true;
@@ -419,12 +426,13 @@ body {
 }
 
 #appp {
+  display: flex;
+  flex-direction: column;
   line-height: 0;
   overflow: hidden;
+  height: 100%;
   -webkit-tap-highlight-color: transparent;
   background-color: #ddd;
-  background-image: url(./resource/bg.jpg);
-  background-size: 100%;
 }
 
 
@@ -440,12 +448,18 @@ p {
   transform-origin: 50% 50%;
 }
 
+.noFlipped {
+  transform: scaleX(1);
+  transform-origin: 50% 50%;
+}
+
 #leftarm {
   transform-origin: 100% 0;
 }
 
 @media screen and (max-width: 600px) {
   svg {
+    flex-shrink: 0;
     max-height: 300px !important;
     margin-left: 0 !important;
   }
@@ -461,5 +475,13 @@ p {
 
 .love-pic-hidden{
   opacity: 0
+}
+
+.chat-container{
+  line-height: 1;
+  flex-grow: 1;
+  overflow: hidden;
+  background-color: #fff;
+  padding: 20px;
 }
 </style> 
