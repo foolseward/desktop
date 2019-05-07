@@ -46,7 +46,7 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     //assetsSubDirectory: '',
-    assetsPublicPath: '/',
+    assetsPublicPath: '/admin/ipfs/',
     //assetsPublicPath: 'http://qiniu.17lvju.com/',
 
     /**

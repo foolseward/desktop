@@ -8,6 +8,7 @@ import { getToken, canTurnTo } from '@/libs/util'
 
 Vue.use(Router)
 const router = new Router({
+  base: '/admin/ipfs/',
   routes,
   mode: 'history'
 })
