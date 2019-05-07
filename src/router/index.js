@@ -8,7 +8,7 @@ import { getToken, canTurnTo } from '@/libs/util'
 
 Vue.use(Router)
 const router = new Router({
-  base: '/lvju/',
+  base: '/admin/lvju/',
   routes,
   mode: 'history'
 })
